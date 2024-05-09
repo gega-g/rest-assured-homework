@@ -1,6 +1,6 @@
 package ge.tbc.tbcitacademy.steps;
 
-import ge.tbc.tbcitacademy.data.BookingData;
+import ge.tbc.tbcitacademy.data.BookingCONSTANTS;
 import ge.tbc.tbcitacademy.data.URLS;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -13,32 +13,32 @@ public class BookingSteps {
     JSONObject bookingDates = new JSONObject();
 
     public BookingSteps fillFirstname() {
-        bookingData.put(BookingData.FIRSTNAME, BookingData.BIDZINA);
+        bookingData.put(BookingCONSTANTS.FIRSTNAME, BookingCONSTANTS.BIDZINA);
         return this;
     }
 
     public BookingSteps fillLastname(){
-        bookingData.put(BookingData.LASTNAME, BookingData.TABAGARI);
+        bookingData.put(BookingCONSTANTS.LASTNAME, BookingCONSTANTS.TABAGARI);
         return this;
     }
 
     public BookingSteps fillTotalPrice(){
-        bookingData.put(BookingData.TOTALPRICE, 2000);
+        bookingData.put(BookingCONSTANTS.TOTALPRICE, BookingCONSTANTS.PRICEININT);
         return this;
     }
     public BookingSteps setPaidToTrue(){
-        bookingData.put(BookingData.DEPOSITPAID, true);
+        bookingData.put(BookingCONSTANTS.DEPOSITPAID, BookingCONSTANTS.TRUE);
         return this;
     }
     public BookingSteps fillBookingDates() {
-        bookingDates.put(BookingData.CHECKIN, BookingData.CHECKINDATE);
-        bookingDates.put(BookingData.CHECKOUT, BookingData.CHECKOUTDATE);
-        bookingData.put(BookingData.BOOKINGDATES, bookingDates);
+        bookingDates.put(BookingCONSTANTS.CHECKIN, BookingCONSTANTS.CHECKINDATE);
+        bookingDates.put(BookingCONSTANTS.CHECKOUT, BookingCONSTANTS.CHECKOUTDATE);
+        bookingData.put(BookingCONSTANTS.BOOKINGDATES, bookingDates);
         return this;
     }
 
     public BookingSteps fillAdditionalNeeds(){
-        bookingData.put(BookingData.ADDITIONALNEEDS, BookingData.LUDI);
+        bookingData.put(BookingCONSTANTS.ADDITIONALNEEDS, BookingCONSTANTS.LUDI);
         return this;
     }
 
@@ -54,6 +54,7 @@ public class BookingSteps {
                 .statusCode();
         response
                 .then()
+                .log().all()
                 .assertThat()
                 .statusCode(200);
         return this;

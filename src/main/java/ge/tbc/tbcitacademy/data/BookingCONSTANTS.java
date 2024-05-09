@@ -1,10 +1,15 @@
 package ge.tbc.tbcitacademy.data;
 
-public class BookingData {
+public class BookingCONSTANTS {
     public static final String FIRSTNAME = "firstname";
+    public static final String UPDATEDFIRSTNAME = "updatedfirstname";
     public static final String LASTNAME = "lastname";
+    public static final String UPDATEDLASTNAME = "updatedlastname";
     public static final String TOTALPRICE = "totalprice";
+    public static final int PRICEININT = 2000;
+    public static final int UPDATEDPRICEININT = 6300;
     public static final String DEPOSITPAID = "depositpaid";
+    public static final boolean TRUE = true;
     public static final String BOOKINGDATES = "bookingdates";
     public static final String ADDITIONALNEEDS = "additionalneeds";
     public static final String CHECKIN = "checkin";

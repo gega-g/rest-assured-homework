@@ -1,12 +1,10 @@
 package ge.tbc.tbcitacademy.specifications;
 
-import ge.tbc.tbcitacademy.data.BookingData;
 import ge.tbc.tbcitacademy.data.URLS;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 

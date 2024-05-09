@@ -1,6 +1,6 @@
 package ge.tbc.tbcitacademy.steps;
 
-import ge.tbc.tbcitacademy.data.PetData;
+import ge.tbc.tbcitacademy.data.PetCONSTANTS;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONArray;
@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 
-import static ge.tbc.tbcitacademy.data.PetData.petID;
+import static ge.tbc.tbcitacademy.data.PetCONSTANTS.petID;
 import static ge.tbc.tbcitacademy.specifications.PetstoreSpecs.petstoreRequestSpec;
 import static ge.tbc.tbcitacademy.specifications.PetstoreSpecs.petstoreResponseSpec;
 import static io.restassured.RestAssured.given;
@@ -64,7 +64,7 @@ public class PetstoreSteps {
     public PetstoreSteps validateID(){
         Response response = given()
                 .spec(petstoreRequestSpec)
-                .param("status", PetData.STATUS)
+                .param("status", PetCONSTANTS.STATUS)
                 .get("/pet/findByStatus");
         response
                 .then()
@@ -76,16 +76,20 @@ public class PetstoreSteps {
     public PetstoreSteps parametersValidation(){
         Response response = given()
                 .spec(petstoreRequestSpec)
-                .param("status", PetData.STATUS)
+                .param("status", PetCONSTANTS.STATUS)
                 .get("/pet/findByStatus");
         response
                 .then()
                 .spec(petstoreResponseSpec)
                 .body("[0].id", equalTo(petID))
-                .body("[0].name", equalTo(PetData.NAME))
-                .body("[0].category.name", equalTo(PetData.DOG))
+                .body("[0].name", equalTo(PetCONSTANTS.NAME))
+                .body("[0].category.name", equalTo(PetCONSTANTS.DOG))
                 .body("[0].category.id", equalTo(125))
-                .body("[0].status", equalTo(PetData.STATUS));
+                .body("[0].status", equalTo(PetCONSTANTS.STATUS));
+        response
+                .then()
+                .log()
+                .all();
 
         return this;
     }
@@ -129,15 +133,13 @@ public class PetstoreSteps {
         response
                 .then()
                 .assertThat()
-                .body("name", equalTo(PetData.NEWNAME))
-                .body("status", equalTo(PetData.NEWSTATUS));
+                .body("name", equalTo(PetCONSTANTS.NEWNAME))
+                .body("status", equalTo(PetCONSTANTS.NEWSTATUS));
         return this;
     }
 
     public PetstoreSteps uploadPicture(){
-//        სამსახურის ლეპტოპზე რაღაც წვდომები მაქვს შეზღუდული და ფოტოს ატვირთვისას
-//        java.io.FileNotFoundException: C:\Users\User\Desktop\puppy (Access is denied) ამას მიგდებს :/ წესით სწორი უნდა იყოს არადა
-        File file = new File(PetData.PICTUREPATH);
+        File file = new File(PetCONSTANTS.PICTUREPATH);
         String additionalMetadata = "additionalMetadata";
         double fileSize = file.length();
 

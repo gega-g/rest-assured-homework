@@ -1,6 +1,6 @@
 package ge.tbc.tbcitacademy.data;
 
-public class PetData {
+public class PetCONSTANTS {
     public static final String NEWNAME = "NewDoggo";
     public static final String NAME = "Doggo";
     public static final String DOG = "dog";

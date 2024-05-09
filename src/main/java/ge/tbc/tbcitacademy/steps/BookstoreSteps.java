@@ -1,6 +1,6 @@
 package ge.tbc.tbcitacademy.steps;
 
-import ge.tbc.tbcitacademy.data.BooksData;
+import ge.tbc.tbcitacademy.data.BooksCONSTANTS;
 import ge.tbc.tbcitacademy.data.URLS;
 import io.restassured.response.Response;
 
@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.*;
 
 public class BookstoreSteps {
     public BookstoreSteps validateQuantity(){
-//        Response response = ExtractResponse.sendRequest(bookstoreRequestSpec, bookstoreResponseSpec);
+//        Response response = ExtractResponse.sendRequest(bookstoreRequestSpec);
         Response response = given()
                 .baseUri(URLS.BOOKSTOREURL)
                 .when()
@@ -32,8 +32,12 @@ public class BookstoreSteps {
         response
                 .then()
                 .assertThat()
-                .body("books.author[0]", equalTo(BooksData.FIRSTAUTHOR))
-                .body("books.author[1]", equalTo(BooksData.SECONDAUTHOR));
+                .body("books.author[0]", equalTo(BooksCONSTANTS.FIRSTAUTHOR))
+                .body("books.author[1]", equalTo(BooksCONSTANTS.SECONDAUTHOR));
+        response
+                .then()
+                .log()
+                .all();
         return this;
     }
 }
