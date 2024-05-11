@@ -1,4 +1,4 @@
-package ge.tbc.tbcitacademy.models.drivers;
+package ge.tbc.tbcitacademy.models.driversData;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

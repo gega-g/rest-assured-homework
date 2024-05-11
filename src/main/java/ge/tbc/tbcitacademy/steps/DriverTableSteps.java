@@ -2,7 +2,7 @@ package ge.tbc.tbcitacademy.steps;
 
 import ge.tbc.tbcitacademy.data.DriverCONSTANTS;
 import ge.tbc.tbcitacademy.data.URLS;
-import ge.tbc.tbcitacademy.models.drivers.DriversItem;
+import ge.tbc.tbcitacademy.models.driversData.DriversItem;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;

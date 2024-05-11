@@ -2,36 +2,11 @@ package ge.tbc.tbcitacademy.models.bookingData;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Bookingdates{
+public record Bookingdates(
 
-	@JsonProperty("checkin")
-	private String checkin;
+	@JsonProperty("checkin")  String checkin,
 
-	@JsonProperty("checkout")
-	private String checkout;
+	@JsonProperty("checkout") String checkout
+){
 
-	public void setCheckin(String checkin){
-		this.checkin = checkin;
-	}
-
-	public String getCheckin(){
-		return checkin;
-	}
-
-	public void setCheckout(String checkout){
-		this.checkout = checkout;
-	}
-
-	public String getCheckout(){
-		return checkout;
-	}
-
-	@Override
- 	public String toString(){
-		return 
-			"Bookingdates{" + 
-			"checkin = '" + checkin + '\'' + 
-			",checkout = '" + checkout + '\'' + 
-			"}";
-		}
 }

@@ -2,11 +2,16 @@ package ge.tbc.tbcitacademy.steps;
 
 import ge.tbc.tbcitacademy.data.BookingCONSTANTS;
 import ge.tbc.tbcitacademy.data.URLS;
+import ge.tbc.tbcitacademy.models.bookingData.Booking;
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONObject;
+import org.testng.Assert;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BookingSteps {
     JSONObject bookingData = new JSONObject();
@@ -71,6 +76,26 @@ public class BookingSteps {
                 .then()
                 .log()
                 .ifStatusCodeIsEqualTo(201);
+        return this;
+    }
+
+    @Step("Changing field order using lombok and after creating booking, validating status code 200")
+    public BookingSteps assertStatusCode(Booking booking){
+        Response response = given()
+                .filter(new AllureRestAssured())
+                .baseUri(URLS.RESTFULURL)
+                .contentType(ContentType.JSON)
+                .body(booking)
+                .post("/booking");
+        response
+                .then().log().all();
+        response
+                .then().assertThat().statusCode(200);
+        return this;
+    }
+    @Step("Checking that firstname field indeed contains 'firstname'")
+    public BookingSteps checkFirstnameField(Booking booking){
+        Assert.assertTrue(booking.firstName().contains("firstname"));
         return this;
     }
 }
