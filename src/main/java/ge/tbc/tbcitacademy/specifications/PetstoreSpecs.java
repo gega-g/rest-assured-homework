@@ -7,11 +7,16 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.testng.annotations.BeforeClass;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.not;
 
 public class PetstoreSpecs {
+    static {
+        specs();
+    }
+
     public static RequestSpecification petstoreRequestSpec;
     public static ResponseSpecification petstoreResponseSpec;
     public static void specs(){
