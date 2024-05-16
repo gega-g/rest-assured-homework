@@ -1,6 +1,12 @@
 package ge.tbc.tbcitacademy.steps;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ge.tbc.tbcitacademy.data.PetCONSTANTS;
+import ge.tbc.tbcitacademy.data.URLS;
+import ge.tbc.tbcitacademy.util.OrderWithLombok;
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONArray;
@@ -160,6 +166,32 @@ public class PetstoreSteps {
                 .body("message", contains(returnedText))
                 .body(("message"), contains("filename"));
         assertThat(fileSize, equalTo(responseFileSize));
+        return this;
+    }
+
+    @Step("Creating new post using lombok, validating status code")
+    public PetstoreSteps postUsingLombok() throws JsonProcessingException {
+        OrderWithLombok.Order order = OrderWithLombok.Order.builder()
+                .id(1)
+                .petId(152)
+                .quantity(2)
+                .status(PetCONSTANTS.DONE)
+                .complete(true)
+                .build();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonOrder = mapper.writeValueAsString(order);
+
+        Response response = given()
+                .filter(new AllureRestAssured())
+                .baseUri(URLS.PETS3URL)
+                .contentType(ContentType.JSON)
+                .body(jsonOrder)
+                .post(URLS.ORDER);
+
+        response.then()
+                .log().all()
+                .assertThat().statusCode(200);
         return this;
     }
 }

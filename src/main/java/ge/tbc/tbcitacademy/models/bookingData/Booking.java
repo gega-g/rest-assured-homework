@@ -1,85 +1,30 @@
 package ge.tbc.tbcitacademy.models.bookingData;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-public class Booking{
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+		"bookingId",
+		"bookingDates",
+		"lastName",
+		"totalPrice",
+		"firstName",
+		"depositPaid",
+		"additionalNeeds"
+})public record Booking (
+	@JsonProperty("bookingId") int bookingId,
+	@JsonProperty("bookingdates") Bookingdates bookingDates,
+	@JsonProperty("lastname") String lastName,
+	@JsonProperty("totalprice") int totalPrice,
+	@JsonProperty("firstname") String firstName,
+	@JsonProperty("depositpaid") boolean depositPaid,
+	@JsonProperty("additionalneeds") String additionalNeeds,
+	@JsonIgnore
+//	@JsonProperty("saleprice") double salePrice,
+	@JsonProperty("passportNo") String passportNo
+){
 
-	@JsonProperty("firstname")
-	private String firstname;
-
-	@JsonProperty("additionalneeds")
-	private String additionalneeds;
-
-	@JsonProperty("bookingdates")
-	private Bookingdates bookingdates;
-
-	@JsonProperty("totalprice")
-	private int totalprice;
-
-	@JsonProperty("depositpaid")
-	private boolean depositpaid;
-
-	@JsonProperty("lastname")
-	private String lastname;
-
-	public void setFirstname(String firstname){
-		this.firstname = firstname;
-	}
-
-	public String getFirstname(){
-		return firstname;
-	}
-
-	public void setAdditionalneeds(String additionalneeds){
-		this.additionalneeds = additionalneeds;
-	}
-
-	public String getAdditionalneeds(){
-		return additionalneeds;
-	}
-
-	public void setBookingdates(Bookingdates bookingdates){
-		this.bookingdates = bookingdates;
-	}
-
-	public Bookingdates getBookingdates(){
-		return bookingdates;
-	}
-
-	public void setTotalprice(int totalprice){
-		this.totalprice = totalprice;
-	}
-
-	public int getTotalprice(){
-		return totalprice;
-	}
-
-	public void setDepositpaid(boolean depositpaid){
-		this.depositpaid = depositpaid;
-	}
-
-	public boolean isDepositpaid(){
-		return depositpaid;
-	}
-
-	public void setLastname(String lastname){
-		this.lastname = lastname;
-	}
-
-	public String getLastname(){
-		return lastname;
-	}
-
-	@Override
- 	public String toString(){
-		return 
-			"Booking{" + 
-			"firstname = '" + firstname + '\'' + 
-			",additionalneeds = '" + additionalneeds + '\'' + 
-			",bookingdates = '" + bookingdates + '\'' + 
-			",totalprice = '" + totalprice + '\'' + 
-			",depositpaid = '" + depositpaid + '\'' + 
-			",lastname = '" + lastname + '\'' + 
-			"}";
-		}
 }
